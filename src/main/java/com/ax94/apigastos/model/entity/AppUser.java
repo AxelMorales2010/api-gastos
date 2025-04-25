@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "usuarios")
-public class Usuario {
+@Table(name = "app_user")
+public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,16 +29,14 @@ public class Usuario {
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Transaccion> transacciones = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transacciones = new ArrayList<>();
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Categoria> categorias = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Category> categorias = new ArrayList<>();
 
     // Roles y seguridad (opcional)
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "usuario_roles", joinColumns = @JoinColumn(name = "usuario_id"))
-    @Column(name = "rol")
+
     private List<String> roles = new ArrayList<>();
 
     public Long getId() {
@@ -81,19 +79,19 @@ public class Usuario {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public List<Transaccion> getTransacciones() {
+    public List<Transaction> getTransacciones() {
         return transacciones;
     }
 
-    public void setTransacciones(List<Transaccion> transacciones) {
+    public void setTransacciones(List<Transaction> transacciones) {
         this.transacciones = transacciones;
     }
 
-    public List<Categoria> getCategorias() {
+    public List<Category> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(List<Categoria> categorias) {
+    public void setCategorias(List<Category> categorias) {
         this.categorias = categorias;
     }
 

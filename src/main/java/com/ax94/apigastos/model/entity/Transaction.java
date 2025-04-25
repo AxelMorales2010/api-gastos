@@ -11,33 +11,33 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "transacciones")
+@Table(name = "transaction")
 @Data
-public class Transaccion {
+public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 100)
-    private String descripcion;
+    private String description;
 
     @Column(nullable = false, precision = 10, scale = 2)
-    private BigDecimal monto;
+    private BigDecimal ammount;
 
     @Column(nullable = false)
-    private LocalDate fecha;
+    private LocalDate date;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
-    private TipoTransaccion tipo;
+    private TipoTransaccion type;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id", nullable = false)
-    private Categoria categoria;
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id", nullable = false)
-    private Usuario usuario;
+    @JoinColumn(name = "user_id", nullable = false)
+    private AppUser user;
 
 }
 

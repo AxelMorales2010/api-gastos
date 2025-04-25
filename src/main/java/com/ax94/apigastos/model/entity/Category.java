@@ -7,29 +7,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "categorias")
+@Table(name = "category")
 @Data
-public class Categoria {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, length = 50)
-    private String nombre;
+    private String name;
 
     @Column(length = 255)
-    private String descripcion;
+    private String description;
 
     @Column(length = 50)
-    private String icono;
+    private String icon;
 
     @Column(length = 20)
     private String color;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+    @JoinColumn(name = "user_id")
+    private AppUser user;
 
-    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Transaccion> transacciones = new ArrayList<>();
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Transaction> transacciones = new ArrayList<>();
 }
